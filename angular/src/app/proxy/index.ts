@@ -1,3 +1,5 @@
+import * as Currencys from './currencys';
 import * as Departments from './departments';
 import * as LegalEntitys from './legal-entitys';
-export { Departments, LegalEntitys };
+import * as Vats from './vats';
+export { Currencys, Departments, LegalEntitys, Vats };

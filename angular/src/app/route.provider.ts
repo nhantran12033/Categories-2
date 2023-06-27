@@ -15,6 +15,25 @@ function configureRoutes(routesService: RoutesService) {
         order: 1,
         layout: eLayoutType.application,
       },
+      {
+        path: '/Categories',
+        name: 'Categories',
+        iconClass: 'fas fa-table',
+        order: 1,
+        layout: eLayoutType.application
+      },
+      {
+        path: '/legalentitys',
+        name: 'Legal Entity',
+        parentName: 'Categories',
+        layout: eLayoutType.application
+      },
+      {
+        path: '/vats',
+        name: 'VAT',
+        parentName: 'Categories',
+        layout: eLayoutType.application
+      }
     ]);
   };
 }

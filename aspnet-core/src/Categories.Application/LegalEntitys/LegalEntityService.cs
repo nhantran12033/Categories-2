@@ -1,4 +1,5 @@
-﻿using Categories.LegalEntitys;
+﻿using Categories.Currencys;
+using Categories.LegalEntitys;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,17 @@ namespace Categories.LegalEntitys
         public LegalEntityService(IRepository<LegalEntity, Guid> legalEntityRepository)
         {
             _legalEntityRepository = legalEntityRepository;
+        }
+        public async Task<List<LegalEntityDto>> GetListID(Guid id)
+        {
+            var items = await _legalEntityRepository.GetListAsync();
+            return items.Where(b => b.Id.Equals(id)).Select(b => new LegalEntityDto
+            {
+                Id = b.Id,
+                Code= b.Code,
+                Description= b.Description,
+                ImportBy = b.ImportBy,
+            }).ToList();
         }
         public async Task<List<LegalEntityDto>> GetListLegalAsync()
         {
@@ -68,6 +80,20 @@ namespace Categories.LegalEntitys
         public async Task DeleteLegalAsync(Guid id)
         {
             await _legalEntityRepository.DeleteAsync(id);
+        }
+
+        public async Task<List<LegalEntityDto>> GetListWhereList(string code, string description, string importBy)
+        {
+            var items = await _legalEntityRepository.GetListAsync();
+            return items.Where(b => b.Code.StartsWith(code) ||
+            b.Description.StartsWith(description) || b.ImportBy.StartsWith(importBy))
+                .Select(b => new LegalEntityDto
+                {
+                    Id = b.Id,
+                    Code = b.Code,
+                    Description= b.Description,
+                    ImportBy = b.ImportBy
+                }).ToList();
         }
     }
 }

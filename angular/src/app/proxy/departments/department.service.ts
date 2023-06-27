@@ -34,6 +34,23 @@ export class DepartmentService {
     { apiName: this.apiName,...config });
   
 
+  getListIDById = (id: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, DepartmentDto[]>({
+      method: 'GET',
+      url: `/api/app/department/${id}/i-d`,
+    },
+    { apiName: this.apiName,...config });
+  
+
+  getListWhereByCodeAndDesAndImportby = (code: string, des: string, importby: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, DepartmentDto[]>({
+      method: 'GET',
+      url: '/api/app/department/where',
+      params: { code, des, importby },
+    },
+    { apiName: this.apiName,...config });
+  
+
   updateList = (id: string, departmentDto: DepartmentDto, config?: Partial<Rest.Config>) =>
     this.restService.request<any, DepartmentDto>({
       method: 'PUT',

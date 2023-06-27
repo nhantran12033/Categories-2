@@ -1,5 +1,9 @@
 ﻿using Categories.Departments;
+using Categories.ExpenseCodes;
+using Categories.KindOfFALs;
 using Categories.LegalEntitys;
+using Categories.VATs;
+using Categories.Currencys;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
@@ -27,6 +31,12 @@ public class CategoriesDbContext :
     ITenantManagementDbContext
 {
     /* Add DbSet properties for your Aggregate Roots / Entities here. */
+    public DbSet<Department> Departments { get; set; }
+    public DbSet<LegalEntity> LegalEntities { get; set; }
+    public DbSet<VAT> VATs { get; set; }
+    public DbSet<KindOfFAL> KindOfFals { get; set; }
+    public DbSet<ExpenseCode> ExpenseCodes { get; set; }
+    public DbSet<Currency> Currencys { get; set; }
 
     #region Entities from the modules
 
@@ -55,8 +65,6 @@ public class CategoriesDbContext :
     public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
 
     #endregion
-    public DbSet<Department> Departments { get; set; }
-    public DbSet<LegalEntity> LegalEntities { get; set; }
     public CategoriesDbContext(DbContextOptions<CategoriesDbContext> options)
         : base(options)
     {
@@ -101,6 +109,35 @@ public class CategoriesDbContext :
             b.Property(x => x.Code).IsRequired().HasMaxLength(128);
             b.Property(x => x.Description).IsRequired().HasMaxLength(128);
             b.Property(x => x.ImportBy).IsRequired().HasMaxLength(128);
+        });
+        builder.Entity<Currency>(b =>
+        {
+            b.ToTable(CategoriesConsts.DbTablePrefix + "Currencys", CategoriesConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.Property(x => x.Code).IsRequired().HasMaxLength(128);
+        });
+        builder.Entity<KindOfFAL>(b =>
+        {
+            b.ToTable(CategoriesConsts.DbTablePrefix + "KindOfFals", CategoriesConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.Property(x => x.KindOfFal).IsRequired().HasMaxLength(128);
+
+        });
+        builder.Entity<VAT>(b =>
+        {
+            b.ToTable(CategoriesConsts.DbTablePrefix + "VATs", CategoriesConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.Property(x => x.VATs).IsRequired().HasMaxLength(128);
+            b.Property(x => x.VATAxCode).IsRequired().HasMaxLength(128);
+            b.Property(x => x.Description).IsRequired().HasMaxLength(128);
+
+
+        });
+        builder.Entity<ExpenseCode>(b =>
+        {
+            b.ToTable(CategoriesConsts.DbTablePrefix + "ExpenseCodes", CategoriesConsts.DbSchema);
+            b.ConfigureByConvention();
+            
         });
 
     }

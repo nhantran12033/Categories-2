@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Categories.LegalEntitys;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -65,6 +66,32 @@ namespace Categories.Departments
         public async Task DeleteAsync(Guid id)
         {
             await _departmentsRepository.DeleteAsync(id);
+        }
+
+        public async Task<List<DepartmentDto>> GetListWhere(string code, string des, string importby)
+        {
+            var items = await _departmentsRepository.GetListAsync();
+            return items.Where(b => b.Code.StartsWith(code) ||
+            b.Description.StartsWith(des) || b.ImportBy.StartsWith(importby))
+                .Select(b => new DepartmentDto
+                {
+                    Id = b.Id,
+                    Code = b.Code,
+                    Description = b.Description,
+                    ImportBy = b.ImportBy
+                }).ToList();
+        }
+        public async Task<List<DepartmentDto>> GetListID(Guid id)
+        {
+            var items = await _departmentsRepository.GetListAsync();
+            return items.Where(b => b.Id.Equals(id)).Select(b => new DepartmentDto
+            {
+                Id = b.Id,
+                Code = b.Code,
+                Description = b.Description,
+                ImportBy = b.ImportBy,
+            }).ToList();
+
         }
     }
 }

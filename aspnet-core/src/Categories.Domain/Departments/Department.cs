@@ -9,5 +9,6 @@ public class Department : AuditedAggregateRoot<Guid>
 {
     public string Code { get; set; }
     public string Description { get; set; }
-    public string ImportBy { get; set; }
+    public string ImportBy { get; set; } 
+    
 }

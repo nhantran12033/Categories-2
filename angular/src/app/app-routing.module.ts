@@ -27,6 +27,8 @@ const routes: Routes = [
   },
   { path: 'departments', loadChildren: () => import('./department/department.module').then(m => m.DepartmentModule) },
   { path: 'legalentitys', loadChildren: () => import('./legaentity/legaentity.module').then(m => m.LegaentityModule) },
+  { path: 'vats', loadChildren: () => import('./vat/vat.module').then(m => m.VatModule) },
+  { path: 'currencys', loadChildren: () => import('./currency/currency.module').then(m => m.CurrencyModule) },
 ];
 
 @NgModule({
