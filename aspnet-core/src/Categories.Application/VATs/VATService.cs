@@ -22,14 +22,14 @@ namespace Categories.VATs
         }
         public async Task<VATDTO> CreateListAsync(VATDTO VatDto)
         {
-            var items = await _vatRepository.GetListAsync();
+
             VAT vat = new VAT
             {
                 VATs = VatDto.VATs,
-                VATAxCode= VatDto.VATAxCode,
+                VATAxCode = VatDto.VATAxCode,
                 Description = VatDto.Description,
-                Modified = VatDto.Modified,
-                ModifiedBy = VatDto.ModifiedBy
+                Modified = DateTime.UtcNow,
+                ModifiedBy = "admin"
 
             };
             await _vatRepository.InsertAsync(vat);
@@ -100,16 +100,15 @@ namespace Categories.VATs
             items.VATs = VatDto.VATs;
             items.VATAxCode = VatDto.VATAxCode;
             items.Description= VatDto.Description;
-            items.Modified = VatDto.Modified;
-            items.ModifiedBy = VatDto.ModifiedBy;
+
             var update = await _vatRepository.UpdateAsync(items);
             var updateDto = new VATDTO
             {
                VATs = update.VATs,
                VATAxCode= update.VATAxCode,
                Description= update.Description,
+               ModifiedBy = update.ModifiedBy,
                Modified= update.Modified,
-               ModifiedBy= update.ModifiedBy,
             };
             return updateDto;
         }

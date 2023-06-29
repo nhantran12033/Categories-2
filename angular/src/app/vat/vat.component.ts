@@ -10,9 +10,7 @@ import { ListService } from '@abp/ng.core';
   templateUrl: './vat.component.html',
   styleUrls: ['./vat.component.scss'],
   providers: [
-    ListService,
-    { provide: NgbDateAdapter, useClass: NgbDateNativeAdapter }
-  ],
+    ListService],
 })
 export class VatComponent implements OnInit {
   vat: VATDTO[];
@@ -37,7 +35,6 @@ export class VatComponent implements OnInit {
   }
 
   Search() {
-
     if (this.searchTable === '') {
       this.ngOnInit();
     }
@@ -67,8 +64,6 @@ export class VatComponent implements OnInit {
       vaTs: [null, Validators.required],
       vatAxCode: [null, Validators.required],
       description: ['', Validators.required],
-      modified: [null, Validators.required],
-      modifiedBy: ['', Validators.required]
     })
   }
   saveEdit() {
@@ -88,8 +83,7 @@ export class VatComponent implements OnInit {
     }
     this.vatService.createList(this.form.value).subscribe(() => {
       this.isModalOpen = false;
-      this.form.reset();
-      this.list.get();
+
       this.ngOnInit();
     });
   }

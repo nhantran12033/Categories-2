@@ -1,0 +1,228 @@
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col col-md-6">
+        <h5 class="card-title">
+          {{ 'Legal Entity' | abpLocalization }}
+        </h5>
+      </div>
+      <div class="text-end col col-md-6">
+        <div class="text-lg-end pt-2">
+          <div class="text-padding">
+            <div>
+              <input  type="text" *ngIf="showInput" [(ngModel)]="searchTable" (input)="Search()" />
+            </div>
+            <div>
+              <button id="search" class="btn btn-primary" (click)="IconSearch()">
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+            <div>
+              <button id="create" class="btn btn-primary" type="button" (click)="create()">
+                <i class="fa fa-plus me-1"></i>
+                <span>{{ "::New Supplier" | abpLocalization }}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <abp-modal [(visible)]="isModelOpen">
+      <ng-template #abpHeader>
+        <h3>{{ ('::New Supplier' ) | abpLocalization }}</h3>
+      </ng-template>
+
+      <ng-template #abpBody>
+        <form [formGroup]="form" (ngSubmit)="save()">
+          <div class="mt-2">
+            <label for="sup-code">Legal Entity</label><span> * </span>
+            <select type="text" id="sup-code" class="form-control" formControlName="code" (change)="onLegalEntityChange($event.target.value)" autofocus>
+              <option>Select Code Legal</option>
+              <option *ngFor="let item of data" [value]="item.code">{{item.code}}</option>
+            </select>
+          </div>
+          <div class="mt-2">
+            <label for="sup-description">Description</label><span> * </span>
+            <select type="text" id="sup-description" class="form-control" formControlName="description" autofocus>
+              <option>Select Description</option>
+              <option *ngFor="let item of selectedLegalEntityDescriptions" [value]="item">{{item}}</option>
+            </select>
+          </div>
+          <div class="mt-2">
+            <label for="sup-vendorAccount">Vendor Account</label><span> * </span>
+            <input type="text" id="sup-vendorAccount" class="form-control" formControlName="vendorAccount" />
+          </div>
+          <div class="mt-2">
+            <label for="sup-vendorName">Vendor Name</label><span> * </span>
+            <input type="text" id="sup-vendorName" class="form-control" formControlName="vendorName" />
+          </div>
+          <div class="mt-2">
+            <label for="sup-vendorHold">Vendor Hold</label><span> * </span>
+            <input type="text" id="sup-vendorHold" class="form-control" formControlName="vendorHold" />
+          </div>
+          <div class="mt-2">
+            <label for="sup-beneficiaryName">Beneficiary Name</label><span> * </span>
+            <input type="text" id="sup-beneficiaryName" class="form-control" formControlName="beneficiaryName" />
+          </div>
+          <div class="mt-2">
+            <label for="sup-beneficiaryAccount">Beneficiary Account</label><span> * </span>
+            <input type="text" id="sup-beneficiaryAccount" class="form-control" formControlName="beneficiaryAccount" />
+          </div>
+          <div class="mt-2">
+            <label for="sup-beneficiaryBankName">Beneficiary Bank Name</label><span> * </span>
+            <input type="text" id="sup-beneficiaryBankName" class="form-control" formControlName="beneficiaryBankName" />
+          </div>
+          <div class="mt-2">
+            <label for="sup-phone">Phone</label><span> * </span>
+            <input type="text" id="sup-phone" class="form-control" formControlName="phone" />
+          </div>
+          <div class="mt-2">
+            <label for="sup-email">Email</label><span> * </span>
+            <input type="text" id="sup-email" class="form-control" formControlName="email" />
+          </div>
+          <div class="mt-2">
+            <label for="sup-taxCode">Tax Code</label><span> * </span>
+            <input type="text" id="sup-taxCode" class="form-control" formControlName="taxCode" />
+          </div>
+          <div class="mt-2">
+            <label for="sup-importBy">Import by</label><span> * </span>
+            <input type="text" id="sup-importBy" class="form-control" formControlName="importBy" />
+          </div>
+
+
+        </form>
+
+      </ng-template>
+      <ng-template #abpFooter>
+        <button type="button" class="btn btn-secondary" abpClose>
+          {{ '::Close' | abpLocalization }}
+        </button>
+
+        <button class="btn btn-primary" (click)="save()" [disabled]="form.invalid">
+          <i class="fa fa-check mr-1"></i>
+          {{ '::Save' | abpLocalization }}
+        </button>
+      </ng-template>
+    </abp-modal>
+
+    <abp-modal [(visible)]="isEditOpen">
+      <ng-template #abpHeader>
+        <h3>{{ ('::Edit Supplier' ) | abpLocalization }}</h3>
+      </ng-template>
+
+      <ng-template #abpBody>
+        <form [formGroup]="form" (ngSubmit)="saveEdit()">
+          <div class="mt-2">
+            <label for="sup-code">Legal Entity</label><span> * </span>
+            <select type="text" id="sup-code" class="form-control" formControlName="code" (change)="onLegalEntityChange($event.target.value)" autofocus>
+              <option>Select Code Legal</option>
+              <option *ngFor="let item of data" [value]="item.code">{{item.code}}</option>
+            </select>
+          </div>
+          <div class="mt-2">
+            <label for="sup-description">Description</label><span> * </span>
+            <select type="text" id="sup-description" class="form-control" formControlName="description" autofocus>
+              <option>Select Description</option>
+              <option *ngFor="let item of selectedLegalEntityDescriptions" [value]="item">{{item}}</option>
+            </select>
+          </div>
+          <div class="mt-2">
+            <label for="sup-vendorAccount">Vendor Account</label><span> * </span>
+            <input type="text" id="sup-vendorAccount" class="form-control" formControlName="vendorAccount" />
+          </div>
+          <div class="mt-2">
+            <label for="sup-vendorName">Vendor Name</label><span> * </span>
+            <input type="text" id="sup-vendorName" class="form-control" formControlName="vendorName" />
+          </div>
+          <div class="mt-2">
+            <label for="sup-vendorHold">Vendor Hold</label><span> * </span>
+            <input type="text" id="sup-vendorHold" class="form-control" formControlName="vendorHold" />
+          </div>
+          <div class="mt-2">
+            <label for="sup-beneficiaryName">Beneficiary Name</label><span> * </span>
+            <input type="text" id="sup-beneficiaryName" class="form-control" formControlName="beneficiaryName" />
+          </div>
+          <div class="mt-2">
+            <label for="sup-beneficiaryAccount">Beneficiary Account</label><span> * </span>
+            <input type="text" id="sup-beneficiaryAccount" class="form-control" formControlName="beneficiaryAccount" />
+          </div>
+          <div class="mt-2">
+            <label for="sup-beneficiaryBankName">Beneficiary Bank Name</label><span> * </span>
+            <input type="text" id="sup-beneficiaryBankName" class="form-control" formControlName="beneficiaryBankName" />
+          </div>
+          <div class="mt-2">
+            <label for="sup-phone">Phone</label><span> * </span>
+            <input type="text" id="sup-phone" class="form-control" formControlName="phone" />
+          </div>
+          <div class="mt-2">
+            <label for="sup-email">Email</label><span> * </span>
+            <input type="text" id="sup-email" class="form-control" formControlName="email" />
+          </div>
+          <div class="mt-2">
+            <label for="sup-taxCode">Tax Code</label><span> * </span>
+            <input type="text" id="sup-taxCode" class="form-control" formControlName="taxCode" />
+          </div>
+          <div class="mt-2">
+            <label for="sup-importBy">Import by</label><span> * </span>
+            <input type="text" id="sup-importBy" class="form-control" formControlName="importBy" />
+          </div>
+
+
+        </form>
+      </ng-template>
+      <ng-template #abpFooter>
+        <button type="button" class="btn btn-secondary" abpClose>
+          {{ '::Close' | abpLocalization }}
+        </button>
+
+        <button class="btn btn-primary" (click)="saveEdit()" [disabled]="form.invalid">
+          <i class="fa fa-check mr-1"></i>
+          {{ '::Save' | abpLocalization }}
+        </button>
+      </ng-template>
+    </abp-modal>
+    <div class="card-body">
+      <ngx-datatable [rows]="sup" default>
+        <ngx-datatable-column [name]="'::Actions' | abpLocalization"
+                              [maxWidth]="150"
+                              [sortable]="false">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <div ngbDropdown container="body" class="d-inline-block">
+              <button class="btn btn-primary btn-sm dropdown-toggle"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      ngbDropdownToggle>
+                <i class="fa fa-cog me-1"></i>{{ '::Actions' | abpLocalization }}
+              </button>
+              <div ngbDropdownMenu>
+                <button ngbDropdownItem (click)="edit(row.id)">
+                  {{ '::Edit' | abpLocalization }}
+                </button>
+                <button ngbDropdownItem (click)="delete(row.id)">
+                  {{ '::Delete' | abpLocalization }}
+                </button>
+              </div>
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [name]="'::Legal Entity' | abpLocalization" prop="code"></ngx-datatable-column>
+        <ngx-datatable-column [name]="'::Description' | abpLocalization" prop="description">
+
+        </ngx-datatable-column>
+        <ngx-datatable-column [name]="'::Vendor Account' | abpLocalization" prop="vendorAccount"></ngx-datatable-column>
+        <ngx-datatable-column [name]="'::Vendor Name' | abpLocalization" prop="vendorName">
+
+        </ngx-datatable-column>
+        <ngx-datatable-column [name]="'::Vendor Hold' | abpLocalization" prop="vendorHold"></ngx-datatable-column>
+        <ngx-datatable-column [name]="'::Beneficiary Name' | abpLocalization" prop="beneficiaryName"></ngx-datatable-column>
+        <ngx-datatable-column [name]="'::Beneficiary Account' | abpLocalization" prop="beneficiaryAccount"></ngx-datatable-column>
+        <ngx-datatable-column [name]="'::Beneficiary Bank Name' | abpLocalization" prop="beneficiaryBankName"></ngx-datatable-column>
+
+        <ngx-datatable-column [name]="'::Phone' | abpLocalization" prop="phone"></ngx-datatable-column>
+        <ngx-datatable-column [name]="'::Email' | abpLocalization" prop="email"></ngx-datatable-column>
+        <ngx-datatable-column [name]="'::Tax Code' | abpLocalization" prop="taxCode"></ngx-datatable-column>
+        <ngx-datatable-column [name]="'::Import by' | abpLocalization" prop="importBy"></ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </div>
+</div>

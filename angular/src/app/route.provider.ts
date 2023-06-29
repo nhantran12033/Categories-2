@@ -19,7 +19,7 @@ function configureRoutes(routesService: RoutesService) {
         path: '/Categories',
         name: 'Categories',
         iconClass: 'fas fa-table',
-        order: 1,
+        order: 2,
         layout: eLayoutType.application
       },
       {
@@ -31,6 +31,12 @@ function configureRoutes(routesService: RoutesService) {
       {
         path: '/vats',
         name: 'VAT',
+        parentName: 'Categories',
+        layout: eLayoutType.application
+      },
+      {
+        path: '/suppliers',
+        name: 'Supplier',
         parentName: 'Categories',
         layout: eLayoutType.application
       }

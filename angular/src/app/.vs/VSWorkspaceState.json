@@ -1,11 +1,13 @@
 {
   "ExpandedNodes": [
     "",
-    "\\home",
     "\\legaentity",
     "\\proxy",
-    "\\proxy\\legal-entitys"
+    "\\proxy\\suppliers",
+    "\\shared",
+    "\\supplier",
+    "\\vat"
   ],
-  "SelectedNode": "\\legaentity\\legaentity.component.scss",
+  "SelectedNode": "\\supplier\\supplier.component.ts",
   "PreviewInSolutionExplorer": false
 }

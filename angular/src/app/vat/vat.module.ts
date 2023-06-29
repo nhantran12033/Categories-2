@@ -3,7 +3,6 @@ import { VatRoutingModule } from './vat-routing.module';
 import { VatComponent } from './vat.component';
 import { SharedModule } from '../shared/shared.module';
 import { PercentPipe } from '@angular/common';
-import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
@@ -15,7 +14,6 @@ import { CommonModule } from '@angular/common';
     SharedModule,
     CommonModule,
     VatRoutingModule,
-    NgbDatepickerModule
   ],
   providers: [
     PercentPipe

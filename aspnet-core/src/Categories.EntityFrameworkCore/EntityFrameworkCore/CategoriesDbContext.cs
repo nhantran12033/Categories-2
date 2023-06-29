@@ -19,6 +19,7 @@ using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
+using Categories.Suppliers;
 
 namespace Categories.EntityFrameworkCore;
 
@@ -37,6 +38,7 @@ public class CategoriesDbContext :
     public DbSet<KindOfFAL> KindOfFals { get; set; }
     public DbSet<ExpenseCode> ExpenseCodes { get; set; }
     public DbSet<Currency> Currencys { get; set; }
+    public DbSet<Supplier> Suppliers { get; set; }
 
     #region Entities from the modules
 
@@ -139,6 +141,14 @@ public class CategoriesDbContext :
             b.ConfigureByConvention();
             
         });
+        builder.Entity<Supplier>(b =>
+        {
+            b.ToTable(CategoriesConsts.DbTablePrefix + "Suppliers", CategoriesConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.HasOne<LegalEntity>().WithMany().HasForeignKey(x => x.LegalID).IsRequired();
+        });
+
+
 
     }
 }

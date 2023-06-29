@@ -42,7 +42,7 @@ namespace Categories.LegalEntitys
         }
         public async Task<LegalEntityDto> CreateListLegalAsync(LegalEntityDto legalEntityDto)
         {
-            var items = await _legalEntityRepository.GetListAsync();
+
             LegalEntity legalEntity = new LegalEntity
             {
                 Code = legalEntityDto.Code,
