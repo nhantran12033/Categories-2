@@ -1,7 +1,9 @@
 ﻿using Categories.Currencys;
 using Categories.Departments;
+using Categories.ExpenseCodes;
 using Categories.LegalEntitys;
 using Categories.Suppliers;
+using Categories.Trips;
 using Categories.VATs;
 using System;
 using System.Threading.Tasks;
@@ -16,16 +18,63 @@ namespace Categories
         private readonly IRepository<VAT, Guid> _vatRepository;
         private readonly IRepository<LegalEntity, Guid> _legalEntityRepository;
         private readonly IRepository<Supplier, Guid> _supplierRepository;
+        private readonly IRepository<ExpenseCode,Guid> _expenseCodeRepository;
+        private readonly IRepository<Department, Guid> _departmentRepository;
+        private readonly IRepository<Trip, Guid> _tripRepository;
+        private readonly IRepository<Currency, Guid> _currencyRepository;
         public CategoriesDataSeederContributor(IRepository<VAT, Guid> vatRepository, 
             IRepository<LegalEntity, Guid> legalEntityRepository,
-            IRepository<Supplier, Guid> supplierRepository)
+            IRepository<Supplier, Guid> supplierRepository,
+            IRepository<ExpenseCode, Guid> expenseCodeRepository,
+            IRepository<Department, Guid> departmentRepository,
+            IRepository<Trip, Guid> tripRepository,
+            IRepository<Currency, Guid> currencyRepository)
         {
             _vatRepository= vatRepository;
             _legalEntityRepository= legalEntityRepository;
             _supplierRepository= supplierRepository;
+            _expenseCodeRepository = expenseCodeRepository;
+            _departmentRepository= departmentRepository;
+            _tripRepository= tripRepository;
+            _currencyRepository= currencyRepository;
         }
         public async Task SeedAsync(DataSeedContext context)
         {
+            await _expenseCodeRepository.InsertAsync(
+                new ExpenseCode
+                {
+                    Code = "E05_08",
+                    Description = "CP chuyen phat nhanh (xoa bo)",
+                    ImportBy = "",
+                },autoSave: true);
+            await _expenseCodeRepository.InsertAsync(
+                new ExpenseCode
+                {
+                    Code = "E05_010",
+                    Description = "Chi phi van phong khac (xoa bo)",
+                    ImportBy = "",
+                }, autoSave: true);
+            await _expenseCodeRepository.InsertAsync(
+                new ExpenseCode
+                {
+                    Code = "E06_01",
+                    Description = "Deskphone cost",
+                    ImportBy = "",
+                }, autoSave: true);
+            var ex = await _expenseCodeRepository.InsertAsync(
+                new ExpenseCode
+                {
+                    Code = "E06_02",
+                    Description = "Handphone cost",
+                    ImportBy = "",
+                }, autoSave: true);
+            var depart = await _departmentRepository.InsertAsync(
+                new Department
+                {
+                    Code = "02_01",
+                    Description = "NS South",
+                    ImportBy = "thanh.nguyen@navigosgroup.com"
+                },autoSave:true);
             if (await _vatRepository.GetCountAsync() <= 0)
             {
                 await _vatRepository.InsertAsync(
@@ -104,6 +153,22 @@ namespace Categories
                     TaxCode = "0304117088",
                     ImportBy = "thanh.nguyen@navigosgroup.com"
                 }, autoSave: true);
+            await _tripRepository.InsertAsync(
+                new Trip
+                {
+                    OperaterName = "Trần Hùng Thành Nhân",
+                    RequestNumber = "BT-04-07-2023.XXX",
+                    RequestedDate = DateTime.Now,
+                    LegalID = legal1.Id,
+                    DepartmentID = depart.Id,
+                    ExpenseCodeID = ex.Id,
+                    VerifierUsername = "nhantran12033@gmail.com",
+                    BusinessType = "DOMESTIC",
+                    VerifierName = "",
+                    Notes = "haha",
+                    totalAmount = 0f
+                }, autoSave: true) ;
+           
         }
     }
 

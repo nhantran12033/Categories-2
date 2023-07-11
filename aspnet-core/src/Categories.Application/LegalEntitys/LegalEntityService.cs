@@ -21,9 +21,9 @@ namespace Categories.LegalEntitys
         public async Task<List<LegalEntityDto>> GetListID(Guid id)
         {
             var items = await _legalEntityRepository.GetListAsync();
-            return items.Where(b => b.Id.Equals(id)).Select(b => new LegalEntityDto
+            return items.Select(b => new LegalEntityDto
             {
-                Id = b.Id,
+                Id = id,
                 Code= b.Code,
                 Description= b.Description,
                 ImportBy = b.ImportBy,

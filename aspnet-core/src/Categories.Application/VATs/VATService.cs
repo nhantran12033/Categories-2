@@ -28,8 +28,8 @@ namespace Categories.VATs
                 VATs = VatDto.VATs,
                 VATAxCode = VatDto.VATAxCode,
                 Description = VatDto.Description,
-                Modified = DateTime.UtcNow,
-                ModifiedBy = "admin"
+                Modified = VatDto.Modified,
+                ModifiedBy = VatDto.ModifiedBy
 
             };
             await _vatRepository.InsertAsync(vat);
@@ -78,11 +78,10 @@ namespace Categories.VATs
                 ModifiedBy = b.ModifiedBy,
             }).ToList();
         }
-        public async Task<List<VATDTO>> GetListWhereAsync(int vats, int vataxcode, string description ,string modifiedBy)
+        public async Task<List<VATDTO>> GetListWhereIntAsync(int vats,int vataxcode)
         {
             var items = await _vatRepository.GetListAsync();
-            return items.Where(b => b.VATs.Equals(vats) ||
-            b.VATAxCode.Equals(vataxcode) || b.Description.StartsWith(description) || b.ModifiedBy.StartsWith(modifiedBy))
+            return items.Where(b=>b.VATAxCode == vataxcode || b.VATs == vats)
                 .Select(b => new VATDTO
             {
                 Id = b.Id,
@@ -93,14 +92,26 @@ namespace Categories.VATs
                 ModifiedBy = b.ModifiedBy,
             }).ToList();
         }
-
+        public async Task<List<VATDTO>> GetListWhereStringAsync(string description, string modifiedBy)
+        {
+            var items = await _vatRepository.GetListAsync();
+            return items.Where(b => b.Description.StartsWith(description) || b.ModifiedBy.StartsWith(modifiedBy))
+                .Select(b => new VATDTO
+                {
+                    Id = b.Id,
+                    VATs = b.VATs,
+                    VATAxCode = b.VATAxCode,
+                    Description = b.Description,
+                    Modified = b.Modified,
+                    ModifiedBy = b.ModifiedBy,
+                }).ToList();
+        }
         public async Task<VATDTO> UpdateListAsync(Guid id, VATDTO VatDto)
         {
             var items = await _vatRepository.FindAsync(id);
             items.VATs = VatDto.VATs;
             items.VATAxCode = VatDto.VATAxCode;
             items.Description= VatDto.Description;
-
             var update = await _vatRepository.UpdateAsync(items);
             var updateDto = new VATDTO
             {

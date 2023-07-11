@@ -10,7 +10,7 @@
         <div class="text-lg-end pt-2">
           <div class="text-padding">
             <div>
-              <input type="search" *ngIf="showInput" [(ngModel)]="searchTable" (input)="Search()" />
+              <input type="text" *ngIf="showInput" [(ngModel)]="searchTable" (input)="Search()" />
             </div>
             <div>
               <button id="search" class="btn btn-primary" (click)="IconSearch()">
@@ -47,6 +47,19 @@
           <div class="mt-2">
             <label for="vat-description">Description</label><span> * </span>
             <input type="text" id="vat-description" class="form-control" formControlName="description" />
+          </div>
+          <div class="mt-2">
+            <label>Modified</label><span> * </span>
+            <input #datepicker="ngbDatepicker"
+                   class="form-control"
+                   name="datepicker"
+                   formControlName="modified"
+                   ngbDatepicker
+                   (click)="datepicker.toggle()" />
+          </div>
+          <div class="mt-2">
+            <label for="vat-modifiedBy">Modified by</label><span> * </span>
+            <input type="text" id="vat-modifiedBy" class="form-control" formControlName="modifiedBy" setValue="admin" />
           </div>
 
         </form>

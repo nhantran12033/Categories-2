@@ -20,6 +20,8 @@ using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
 using Categories.Suppliers;
+using Categories.Trips;
+using Categories.TripExpenses;
 
 namespace Categories.EntityFrameworkCore;
 
@@ -39,6 +41,8 @@ public class CategoriesDbContext :
     public DbSet<ExpenseCode> ExpenseCodes { get; set; }
     public DbSet<Currency> Currencys { get; set; }
     public DbSet<Supplier> Suppliers { get; set; }
+    public DbSet<Trip> Trips { get; set; }
+    public DbSet<TripExpense> TripExpenses { get; set; }
 
     #region Entities from the modules
 
@@ -147,7 +151,21 @@ public class CategoriesDbContext :
             b.ConfigureByConvention();
             b.HasOne<LegalEntity>().WithMany().HasForeignKey(x => x.LegalID).IsRequired();
         });
+        builder.Entity<Trip>(b =>
+        {
+            b.ToTable(CategoriesConsts.DbTablePrefix + "Trips", CategoriesConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.HasOne<LegalEntity>().WithMany().HasForeignKey(x => x.LegalID).IsRequired();
+            b.HasOne<Department>().WithMany().HasForeignKey(x => x.DepartmentID).IsRequired();
+            b.HasOne<ExpenseCode>().WithMany().HasForeignKey(x => x.ExpenseCodeID).IsRequired();
+        });
+        builder.Entity<TripExpense>(b =>
+        {
+            b.ToTable(CategoriesConsts.DbTablePrefix + "TripExpenses", CategoriesConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.HasOne<Trip>().WithMany().HasForeignKey(x => x.TripId).IsRequired();
 
+        });
 
 
     }

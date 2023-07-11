@@ -42,11 +42,20 @@ export class VATService {
     { apiName: this.apiName,...config });
   
 
-  getListWhere = (vats: number, vataxcode: number, description: string, modifiedBy: string, config?: Partial<Rest.Config>) =>
+  getListWhereInt = (vats: number, vataxcode: number, config?: Partial<Rest.Config>) =>
     this.restService.request<any, VATDTO[]>({
       method: 'GET',
-      url: '/api/app/v-aT/where',
-      params: { vats, vataxcode, description, modifiedBy },
+      url: '/api/app/v-aT/where-int',
+      params: { vats, vataxcode },
+    },
+    { apiName: this.apiName,...config });
+  
+
+  getListWhereString = (description: string, modifiedBy: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, VATDTO[]>({
+      method: 'GET',
+      url: '/api/app/v-aT/where-string',
+      params: { description, modifiedBy },
     },
     { apiName: this.apiName,...config });
   

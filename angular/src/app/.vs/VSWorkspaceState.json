@@ -4,10 +4,12 @@
     "\\legaentity",
     "\\proxy",
     "\\proxy\\suppliers",
+    "\\proxy\\trips",
     "\\shared",
     "\\supplier",
+    "\\trip-information",
     "\\vat"
   ],
-  "SelectedNode": "\\supplier\\supplier.component.ts",
+  "SelectedNode": "\\proxy\\trips\\trip-information.service.ts",
   "PreviewInSolutionExplorer": false
 }

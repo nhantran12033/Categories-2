@@ -5,5 +5,7 @@ import * as KindOfFal from './kind-of-fal';
 import * as KindOfFals from './kind-of-fals';
 import * as LegalEntitys from './legal-entitys';
 import * as Suppliers from './suppliers';
+import * as TripExpenses from './trip-expenses';
+import * as Trips from './trips';
 import * as Vats from './vats';
-export { Currencys, Departments, ExpenseCodes, KindOfFal, KindOfFals, LegalEntitys, Suppliers, Vats };
+export { Currencys, Departments, ExpenseCodes, KindOfFal, KindOfFals, LegalEntitys, Suppliers, TripExpenses, Trips, Vats };

@@ -30,6 +30,8 @@ const routes: Routes = [
   { path: 'vats', loadChildren: () => import('./vat/vat.module').then(m => m.VatModule) },
   { path: 'currencys', loadChildren: () => import('./currency/currency.module').then(m => m.CurrencyModule) },
   { path: 'suppliers', loadChildren: () => import('./supplier/supplier.module').then(m => m.SupplierModule) },
+  { path: 'trip', loadChildren: () => import('./trip-information/trip-information.module').then(m => m.TripInformationModule) },
+  { path: 'tripExpenses', loadChildren: () => import('./trip-expense/trip-expense.module').then(m => m.TripExpenseModule) },
 ];
 
 @NgModule({

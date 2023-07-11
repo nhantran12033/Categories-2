@@ -10,7 +10,8 @@ import { ListService } from '@abp/ng.core';
   templateUrl: './vat.component.html',
   styleUrls: ['./vat.component.scss'],
   providers: [
-    ListService],
+    ListService,
+    { provide: NgbDateAdapter, useClass: NgbDateNativeAdapter }],
 })
 export class VatComponent implements OnInit {
   vat: VATDTO[];
@@ -19,7 +20,7 @@ export class VatComponent implements OnInit {
   isSearchOpen = false;
   showInput = false;
   currentID: string;
-  searchTable: string;
+  searchTable: any;
 
   form: FormGroup;
   constructor(
@@ -38,8 +39,13 @@ export class VatComponent implements OnInit {
     if (this.searchTable === '') {
       this.ngOnInit();
     }
+    else if (parseInt(this.searchTable)) {
+      this.vatService.getListWhereInt(parseInt(this.searchTable), parseInt(this.searchTable)).subscribe(response => {
+        this.vat = response;
+      });
+    }
     else {
-      this.vatService.getListWhere(parseInt(this.searchTable), parseInt(this.searchTable), this.searchTable, this.searchTable).subscribe(response => {
+      this.vatService.getListWhereString(this.searchTable, this.searchTable).subscribe(response => {
         this.vat = response;
       });
     }
@@ -64,6 +70,8 @@ export class VatComponent implements OnInit {
       vaTs: [null, Validators.required],
       vatAxCode: [null, Validators.required],
       description: ['', Validators.required],
+      modified: [null, Validators.required],
+      modifiedBy: [null, Validators.required]
     })
   }
   saveEdit() {
