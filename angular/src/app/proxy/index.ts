@@ -1,6 +1,8 @@
 import * as Currencys from './currencys';
 import * as Departments from './departments';
 import * as ExpenseCodes from './expense-codes';
+import * as ExpenseDetail from './expense-detail';
+import * as ExpenseDetails from './expense-details';
 import * as KindOfFal from './kind-of-fal';
 import * as KindOfFals from './kind-of-fals';
 import * as LegalEntitys from './legal-entitys';
@@ -8,4 +10,4 @@ import * as Suppliers from './suppliers';
 import * as TripExpenses from './trip-expenses';
 import * as Trips from './trips';
 import * as Vats from './vats';
-export { Currencys, Departments, ExpenseCodes, KindOfFal, KindOfFals, LegalEntitys, Suppliers, TripExpenses, Trips, Vats };
+export { Currencys, Departments, ExpenseCodes, ExpenseDetail, ExpenseDetails, KindOfFal, KindOfFals, LegalEntitys, Suppliers, TripExpenses, Trips, Vats };

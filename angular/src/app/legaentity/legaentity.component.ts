@@ -8,6 +8,7 @@ import { ConfirmationService, Confirmation } from '@abp/ng.theme.shared';
   selector: 'app-legaentity',
   templateUrl: './legaentity.component.html',
   styleUrls: ['./legaentity.component.scss'],
+  template: '<input id="input-search" [(ngModel)]="searchTable" (input)="Search()"/>'
 })
 export class LegaentityComponent implements OnInit {
   legal: LegalEntityDto[];
@@ -15,7 +16,7 @@ export class LegaentityComponent implements OnInit {
   isEditOpen = false;
   isSearchOpen = false;
   showInput = false;
-
+  selectedLegal = {} as LegalEntityDto;
   currentID: string;
   searchTable: string;
   form: FormGroup;

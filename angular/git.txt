@@ -1,0 +1,10 @@
+git branch (check branch)
+git branch "branch_name" (create new branch)
+git checkout "branch_name" (move to branch_name)
+
+
+git init 
+git add . 
+git commit -m "message"
+git push -f -u origin "branch"
+

@@ -9,7 +9,7 @@ namespace Categories.TripExpenses
 {
     public interface ITripExpenseAppService
     {
-        public Task<TripExpenseDto> CreateTripAsync(string TripInfID, TripExpenseDto dto);
+        public Task<TripExpenseDto> CreateTripAsync(string TripInfID,List<TripExpenseDto> dtos);
         public Task<List<TripExpenseDto>> GetListAsync();
         public Task<List<TripExpenseDto>> GetListIDAsync(Guid id);
     }

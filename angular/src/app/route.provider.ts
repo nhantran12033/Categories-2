@@ -16,6 +16,7 @@ function configureRoutes(routesService: RoutesService) {
         layout: eLayoutType.application,
       },
       {
+
         path: '/NewRequest',
         name: 'New Request',
         iconClass: 'fas fa-plus',
@@ -25,45 +26,9 @@ function configureRoutes(routesService: RoutesService) {
         path: '/trip',
         name: 'Business Trip',
         parentName: 'New Request',
+        iconClass: 'fas fa-list',
         layout: eLayoutType.application,
       },
-      {
-        path: '/Categories',
-        name: 'Categories',
-        iconClass: 'fas fa-table',
-        order: 2,
-        layout: eLayoutType.application
-      },
-      {
-        path: '/legalentitys',
-        name: 'Legal Entity',
-        parentName: 'Categories',
-        layout: eLayoutType.application
-      },
-      {
-        path: '/vats',
-        name: 'VAT',
-        parentName: 'Categories',
-        layout: eLayoutType.application
-      },
-      {
-        path: '/suppliers',
-        name: 'Supplier',
-        parentName: 'Categories',
-        layout: eLayoutType.application
-      },
-      {
-        path: '/tripExpenses',
-        name: 'Business Trip List',
-        iconClass: 'fas fa-list',
-        layout: eLayoutType.application
-      },
-      {
-        path: '/currencys',
-        name: 'Currency',
-        iconClass: 'fas fa-list',
-        layout: eLayoutType.application
-      }
     ]);
   };
 }

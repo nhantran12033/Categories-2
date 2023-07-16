@@ -175,6 +175,75 @@ namespace Categories.Migrations
                     b.ToTable("AppExpenseCodes", (string)null);
                 });
 
+            modelBuilder.Entity("Categories.ExpenseDetails.ExpenseDetail", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<float>("EquivalentInVND")
+                        .HasColumnType("real");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<string>("Item")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("OriginalAmount")
+                        .HasColumnType("real");
+
+                    b.Property<string>("OriginalCurrency")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("OriginalUnit")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Specification")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("TripExId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<float>("Volume")
+                        .HasColumnType("real");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TripExId");
+
+                    b.ToTable("AppExpenseDeTails", (string)null);
+                });
+
             modelBuilder.Entity("Categories.KindOfFALs.KindOfFAL", b =>
                 {
                     b.Property<Guid>("Id")
@@ -385,16 +454,9 @@ namespace Categories.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("EquivalentInVND")
-                        .HasColumnType("int");
-
                     b.Property<string>("ExtraProperties")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties");
-
-                    b.Property<string>("Item")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("LastModificationTime")
                         .HasColumnType("datetime2")
@@ -404,39 +466,15 @@ namespace Categories.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("LastModifierId");
 
-                    b.Property<string>("Notes")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("OriginalAmount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("OriginalCurrency")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("OriginalUnit")
-                        .HasColumnType("int");
-
                     b.Property<string>("Purpose")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Specification")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TotalAmount")
-                        .HasColumnType("int");
 
                     b.Property<int>("TotalNights")
                         .HasColumnType("int");
 
                     b.Property<Guid>("TripId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Volume")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -2236,6 +2274,15 @@ namespace Categories.Migrations
                     b.HasKey("TenantId", "Name");
 
                     b.ToTable("AbpTenantConnectionStrings", (string)null);
+                });
+
+            modelBuilder.Entity("Categories.ExpenseDetails.ExpenseDetail", b =>
+                {
+                    b.HasOne("Categories.TripExpenses.TripExpense", null)
+                        .WithMany()
+                        .HasForeignKey("TripExId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Categories.Suppliers.Supplier", b =>

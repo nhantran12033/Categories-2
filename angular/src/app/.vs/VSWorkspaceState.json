@@ -1,15 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\legaentity",
-    "\\proxy",
-    "\\proxy\\suppliers",
-    "\\proxy\\trips",
-    "\\shared",
-    "\\supplier",
-    "\\trip-information",
-    "\\vat"
+    ""
   ],
-  "SelectedNode": "\\proxy\\trips\\trip-information.service.ts",
+  "SelectedNode": "\\app-routing.module.ts",
   "PreviewInSolutionExplorer": false
 }

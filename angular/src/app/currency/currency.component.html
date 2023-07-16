@@ -1,4 +1,5 @@
 <div class="card">
+
   <div class="card-header">
     <div class="row">
       <div class="col col-md-6">
@@ -54,5 +55,81 @@
     </ngx-datatable>
   </div>
 </div>
+    
+    <div class="card-body">
+        <ngx-datatable [rows]="data" default>
+            <ngx-datatable-column [name]="'::Code' | abpLocalization" prop="code">
+            </ngx-datatable-column>
 
+            <ngx-datatable-column [name]="'::Title' | abpLocalization" prop="title"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::Exchange Rate' | abpLocalization" prop="exchangeRate">
+
+            </ngx-datatable-column>
+            <ngx-datatable-column [name]="'::Modified By' | abpLocalization" prop="modifiedBy">
+
+            </ngx-datatable-column>
+            <ngx-datatable-column [name]="'::Action' | abpLocalization">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <div ngbDropdown container="body" class="d-inline-block">
+                        <button class="btn btn-primary btn-sm dropdown-toggle" 
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                ngbDropdownToggle>
+                            <i class="fa fa-cog me-1"></i> {{'::Actions' | abpLocalization}} 
+                        </button>
+                        <div ngbDropdownMenu>
+                            <button ngbDropdownItem (click)="editCurrency(row.id)">
+                              {{'::Edit' | abpLocalization}}
+                            </button>
+                            <button ngbDropdownItem (click)="delete(row.id)">
+                              {{'::Delete' | abpLocalization}}
+                            </button>
+                        </div>
+                    </div>
+                    <abp-modal [(visible)]="isEditOpen">
+                        <ng-template #abpHeader>
+                            <h3>{{ '::Edit Currency' | abpLocalization }}</h3>
+                          </ng-template>
+              
+                          <ng-template #abpBody>
+                            <form [formGroup]="form" (ngSubmit)="saveEdit(row.id)">
+                              <div class="mt-2">
+                                <label for="currency-code">Code</label><span> * </span>
+                                <input type="text" id="currency-code" class="form-control" formControlName="code" autofocus />
+                              </div>
+                              <div class="mt-2">
+                                <label for="currency-title">Title</label><span> * </span>
+                                <input type="text" id="currency-title" class="form-control" formControlName="title" autofocus />
+                              </div>
+                              <div class="mt-2">
+                                <label for="currency-exchangerate">Exchange Rate</label><span> * </span>
+                                <input type="number" id="currency-exchangerate" class="form-control" formControlName="exchangeRate" />
+                              </div>
+                              <div class="mt-2">
+                                <label for="currency-modifiedby">Modified by</label><span> * </span>
+                                <input type="text" id="currency-modifiedby" class="form-control" formControlName="modifiedBy" />
+                              </div>
+              
+                            </form>
+                          </ng-template>
+                          <ng-template #abpFooter>
+                            <button type="button" class="btn btn-secondary" abpClose>
+                              {{ '::Close' | abpLocalization }}
+                            </button>
+              
+                            <button class="btn btn-primary" (click)="saveEdit(row.id)" [disabled]="form.invalid">
+                              <i class="fa fa-check mr-1"></i>
+                              {{ '::Save' | abpLocalization }}
+                            </button>
+                          </ng-template>
+                    </abp-modal>
+                </ng-template>
+            </ngx-datatable-column>
+        </ngx-datatable>
+        <div class="text-padding">
+            <button id="create" class="btn btn-primary" type="button" (click)="ngOnInit()">
+                <span>{{ "::Restart" | abpLocalization }}</span>
+            </button>
+        </div>
+    </div>
 

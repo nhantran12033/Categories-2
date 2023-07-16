@@ -36,6 +36,7 @@ export class VatComponent implements OnInit {
   }
 
   Search() {
+
     if (this.searchTable === '') {
       this.ngOnInit();
     }
@@ -71,7 +72,9 @@ export class VatComponent implements OnInit {
       vatAxCode: [null, Validators.required],
       description: ['', Validators.required],
       modified: [null, Validators.required],
-      modifiedBy: [null, Validators.required]
+
+
+
     })
   }
   saveEdit() {
@@ -91,7 +94,8 @@ export class VatComponent implements OnInit {
     }
     this.vatService.createList(this.form.value).subscribe(() => {
       this.isModalOpen = false;
-
+      this.form.reset();
+      this.list.get();
       this.ngOnInit();
     });
   }

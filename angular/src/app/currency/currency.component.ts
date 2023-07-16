@@ -1,13 +1,14 @@
+
 import { ListService } from '@abp/ng.core';
 import { Component, OnInit } from '@angular/core';
 import { CurrencyDto, CurrencyService } from '../proxy/currencys';
-
 @Component({
   selector: 'app-currency',
   templateUrl: './currency.component.html',
   styleUrls: ['./currency.component.scss'],
   providers: [ListService]
 })
+
 export class CurrencyComponent implements OnInit {
   data: CurrencyDto[]
   constructor(
@@ -21,7 +22,8 @@ export class CurrencyComponent implements OnInit {
   }
   Delete(id: string) {
     this.cur.delete(id).subscribe((response) => {
-      
+
     })
   }
 }
+

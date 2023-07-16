@@ -4,6 +4,7 @@ import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { TripInformationRoutingModule } from './trip-information-routing.module';
 import { TripInformationComponent } from './trip-information.component';
 import { SharedModule } from '../shared/shared.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,6 +16,8 @@ import { SharedModule } from '../shared/shared.module';
     TripInformationRoutingModule,
     SharedModule,
     NgbDatepickerModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class TripInformationModule { }

@@ -2,6 +2,7 @@
 using Categories.ExpenseCodes;
 using Categories.KindOfFALs;
 using Categories.LegalEntitys;
+using Categories.ExpenseDetails;
 using Categories.VATs;
 using Categories.Currencys;
 using Microsoft.EntityFrameworkCore;
@@ -43,6 +44,7 @@ public class CategoriesDbContext :
     public DbSet<Supplier> Suppliers { get; set; }
     public DbSet<Trip> Trips { get; set; }
     public DbSet<TripExpense> TripExpenses { get; set; }
+    public DbSet<ExpenseDetail> ExpenseDetails { get; set; }
 
     #region Entities from the modules
 
@@ -166,7 +168,11 @@ public class CategoriesDbContext :
             b.HasOne<Trip>().WithMany().HasForeignKey(x => x.TripId).IsRequired();
 
         });
-
-
+        builder.Entity<ExpenseDetail>(b =>
+        {
+            b.ToTable(CategoriesConsts.DbTablePrefix + "ExpenseDeTails", CategoriesConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.HasOne<TripExpense>().WithMany().HasForeignKey(x => x.TripExId).IsRequired();
+        });
     }
 }

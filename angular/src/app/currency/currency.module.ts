@@ -6,6 +6,11 @@ import { CurrencyComponent } from './currency.component';
 import { SharedModule } from '../shared/shared.module';
 
 
+
+
+
+
+
 @NgModule({
   declarations: [
     CurrencyComponent
@@ -13,7 +18,10 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     CurrencyRoutingModule,
+
     SharedModule
+
+
   ]
 })
 export class CurrencyModule { }

@@ -9,12 +9,12 @@ export class TripExpenseService {
   apiName = 'Default';
   
 
-  createTrip = (notes: string, dto: TripExpenseDto, config?: Partial<Rest.Config>) =>
+  createTrip = (notes: string, dtos: TripExpenseDto[], config?: Partial<Rest.Config>) =>
     this.restService.request<any, TripExpenseDto>({
       method: 'POST',
       url: '/api/app/trip-expense/trip',
       params: { notes },
-      body: dto,
+      body: dtos,
     },
     { apiName: this.apiName,...config });
   

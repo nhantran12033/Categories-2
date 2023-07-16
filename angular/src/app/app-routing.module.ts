@@ -32,6 +32,8 @@ const routes: Routes = [
   { path: 'suppliers', loadChildren: () => import('./supplier/supplier.module').then(m => m.SupplierModule) },
   { path: 'trip', loadChildren: () => import('./trip-information/trip-information.module').then(m => m.TripInformationModule) },
   { path: 'tripExpenses', loadChildren: () => import('./trip-expense/trip-expense.module').then(m => m.TripExpenseModule) },
+  { path: 'kind-of-fal', loadChildren: () => import('./kind-of-fal/kind-of-fal.module').then(m => m.KindOfFalModule)},
+  { path: 'expensecodes', loadChildren: () => import('./expense-codes/expense-codes.module').then(m => m.ExpenseCodesModule)},
 ];
 
 @NgModule({
